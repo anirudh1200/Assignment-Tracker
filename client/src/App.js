@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
 import SideDrawer from './components/layout/SideDrawer';
 import Backdrop from './components/layout/Backdrop';
+import Details from './components/submissions/Details';
 
 class App extends Component {
     state = {
@@ -29,6 +30,7 @@ class App extends Component {
                     <Navbar click={this.drawerToggleClickHandler} />
                     <Switch>
                         <Route exact path='/' component={Dashboard} />
+                        <Route path='/submission/:id' component={Details} />
                     </Switch>
                     <SideDrawer show={this.state.sideDrawerOpen} closeit={this.backdropClickHandler} />
                     {backdrop}
