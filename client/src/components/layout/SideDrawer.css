@@ -1,0 +1,38 @@
+.side-drawer{
+    height: 100%;
+    background: white;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 400px;
+    width: 65%;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+}
+
+.side-drawer.open{
+    transform: translateX(0);
+}
+
+nav ul a{
+    color: rgb(20,20,20);
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+nav ul{
+    width: 100%;
+}
+
+nav ul li{
+    width: 100%;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}

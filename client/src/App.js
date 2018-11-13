@@ -1,14 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
+import Navbar from './components/layout/Navbar';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Dashboard from './components/dashboard/Dashboard';
+import SideDrawer from './components/layout/SideDrawer';
+import Backdrop from './components/layout/Backdrop';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          <h1>Hello</h1>
-      </div>
-    );
-  }
+    state = {
+        sideDrawerOpen: false
+    }
+    drawerToggleClickHandler = () => {
+        this.setState((prevState) => {
+            return {sideDrawerOpen : !prevState.sideDrawerOpen};
+        });
+    }
+    backdropClickHandler = () =>{
+        this.setState({sideDrawerOpen: false});
+    }
+    render() {
+        let backdrop;
+        if(this.state.sideDrawerOpen){
+            backdrop = <Backdrop click={this.backdropClickHandler} />;
+        }
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Navbar click={this.drawerToggleClickHandler} />
+                    <Switch>
+                        <Route exact path='/' component={Dashboard} />
+                    </Switch>
+                    <SideDrawer show={this.state.sideDrawerOpen} closeit={this.backdropClickHandler} />
+                    {backdrop}
+                </div>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default App;
