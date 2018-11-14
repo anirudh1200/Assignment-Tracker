@@ -6,6 +6,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import SideDrawer from './components/layout/SideDrawer';
 import Backdrop from './components/layout/Backdrop';
 import Details from './components/submissions/Details';
+import CreateNew from './components/submissions/CreateNew';
 
 class App extends Component {
     state = {
@@ -31,6 +32,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' component={Dashboard} />
                         <Route path='/submission/:id' component={Details} />
+                        <Route path='/create' component={CreateNew} />
                     </Switch>
                     <SideDrawer show={this.state.sideDrawerOpen} closeit={this.backdropClickHandler} />
                     {backdrop}

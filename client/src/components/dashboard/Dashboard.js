@@ -25,7 +25,7 @@ class Dashboard extends Component{
 
 const mapStateToProps = (state) => {
     return{
-        submissions: state.state.submissions
+        submissions: state.submissions
     }
 }
 
