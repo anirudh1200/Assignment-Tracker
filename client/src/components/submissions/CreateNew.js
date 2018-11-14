@@ -4,10 +4,6 @@ import uuid from 'uuid';
 
 class CreateNew extends Component{
 
-    constuctor(){
-        this.routeChange = this.routeChange.bind(this);
-    }
-
     state = {
         title: '',
         subject: '',
@@ -23,7 +19,7 @@ class CreateNew extends Component{
         });
     }
 
-    redirectHome(){
+    redirectHome = () => {
         let path = `/`;
         this.props.history.push(path);
     }

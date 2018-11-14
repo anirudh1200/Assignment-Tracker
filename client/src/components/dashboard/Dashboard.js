@@ -14,6 +14,12 @@ class Dashboard extends Component{
     handleEdit = e => {
         console.log("To be edited");
         console.log(e.target.id);
+        this.redirectEdit(e.target.id);
+    }
+
+    redirectEdit = id => {
+        let path = `/edit/` + id;
+        this.props.history.push(path);
     }
 
     render(){

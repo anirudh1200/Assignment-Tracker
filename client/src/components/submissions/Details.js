@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 
 class Details extends Component{
 
-    constuctor(){
-        this.routeChange = this.routeChange.bind(this);
-    }
-
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
             console.log("To be deleted");
@@ -18,10 +14,16 @@ class Details extends Component{
     handleEdit = e => {
         console.log("To be edited");
         console.log(e.target.id);
+        this.redirectEdit(e.target.id);
     }
 
-    redirectHome(){
+    redirectHome = () => {
         let path = `/`;
+        this.props.history.push(path);
+    }
+
+    redirectEdit = id => {
+        let path = `/edit/` + id;
         this.props.history.push(path);
     }
 

@@ -22,6 +22,14 @@ const SubmissionReducer = (state = initState, action) => {
             return {
                 submissions: newSubmissions
             }
+        case 'EDIT_SUBMISSION':
+            console.log("Edited");
+            let editedSubmissions = state.submissions.filter(submission => {
+                return action.id !== submission.id
+            });
+            return {
+                submissions: editedSubmissions
+            }
         default:
             console.log("Error");
             return state;
