@@ -10,7 +10,7 @@ const SideDrawer = props => {
     return(
         <nav className={drawerClasses}>
             <ul>
-                <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>
+                <li onClick={props.closeit}><NavLink to="/create">Add New Submission</NavLink></li>
                 <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>
                 <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>
                 <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>

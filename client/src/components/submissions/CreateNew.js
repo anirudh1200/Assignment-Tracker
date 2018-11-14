@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
 
 class CreateNew extends Component{
+
+    constuctor(){
+        this.routeChange = this.routeChange.bind(this);
+    }
 
     state = {
         title: '',
         subject: '',
         date: '',
         time: 'Not Specified',
-        content: ''
+        content: '',
+        id: uuid()
     }
 
     handleChange = e => {
@@ -17,9 +23,15 @@ class CreateNew extends Component{
         });
     }
 
+    redirectHome(){
+        let path = `/`;
+        this.props.history.push(path);
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.addPost(this.state);
+        this.redirectHome();
     }
 
     render(){
@@ -44,8 +56,7 @@ class CreateNew extends Component{
                         <input type="text" id="time" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="content">Content</label>
-
+                        <label htmlFor="content" maxLength="250">Content</label>
                         <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
                     </div>
                     <div className="input-field">
