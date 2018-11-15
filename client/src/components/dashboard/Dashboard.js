@@ -8,7 +8,7 @@ class Dashboard extends Component{
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
             console.log("To be deleted");
-            this.props.deletePost(e.target._id);
+            this.props.deletePost(e.target.id);
         }
     }
 
@@ -61,7 +61,15 @@ const mapDispatchToProps = (dispatch) => {
                     submission: res.data
                 }))
         },
-        deletePost: (id) => { dispatch({type: "DELETE_SUBMISSION", id}) }
+        deletePost: (id) => {
+            dispatch({type: "ITEMS_LOADING"});
+            axios
+                .delete(`http://localhost:5000/api/submissions/${id}`)
+                .then(res => dispatch({
+                    type: "DELETE_SUBMISSION",
+                    id
+                }))
+        }
     }
 }
 

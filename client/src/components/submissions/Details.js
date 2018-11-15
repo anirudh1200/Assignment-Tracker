@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Details extends Component{
 
@@ -70,7 +71,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        deletePost: (id) => { dispatch({type: "DELETE_SUBMISSION", id}) }
+        deletePost: (id) => {
+            dispatch({type: "ITEMS_LOADING"});
+            axios
+                .delete(`http://localhost:5000/api/submissions/${id}`)
+                .then(res => dispatch({
+                    type: "DELETE_SUBMISSION",
+                    id
+                }))
+        }
     }
 }
 

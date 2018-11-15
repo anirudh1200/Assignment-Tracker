@@ -16,7 +16,8 @@ const SubmissionReducer = (state = initState, action) => {
             console.log("Submission Added");
             return{
                 ...state,
-                submissions: [...state.submissions, action.submission]
+                submissions: [...state.submissions, action.submission],
+                loading: false
             }
         case 'DELETE_SUBMISSION':
             console.log("Deleted");
@@ -30,7 +31,7 @@ const SubmissionReducer = (state = initState, action) => {
         case 'EDIT_SUBMISSION':
             console.log("Edited");
             let editedSubmissions = state.submissions.filter(submission => {
-                return action.id !== submission.id
+                return action.id !== submission._id
             });
             return {
                 ...state,
