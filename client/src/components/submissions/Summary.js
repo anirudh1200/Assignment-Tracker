@@ -6,7 +6,7 @@ const Summary = props => {
     return(
         <div className="card z-depth-1 submission-summary">
             <div className="row">
-                <Link to={ '/submission/' + submission.id } submission={ submission } key={ submission.id }>
+                <Link to={ '/submission/' + submission._id } submission={ submission } key={ submission._id }>
                     <div className="col s9">
                         <div className="card-content grey-text text-darken-4">
                             <span className="card-title"> { submission.title } </span>
@@ -17,8 +17,8 @@ const Summary = props => {
                     </div>
                 </Link>
                 <div className="col s3">
-                    <i className="material-icons center" onClick={ props.onEdit } style={{color: "black", display: "block", marginTop: "50%"}} id={ submission.id }>edit</i>
-                    <i className="material-icons center" onClick={ props.onDelete } style={{color: "black", display: "block", marginTop: "20%"}} id={ submission.id }>delete</i>
+                    <i className="material-icons center" onClick={ props.onEdit } style={{color: "black", display: "block", marginTop: "50%"}} id={ submission._id }>edit</i>
+                    <i className="material-icons center" onClick={ props.onDelete } style={{color: "black", display: "block", marginTop: "20%"}} id={ submission._id }>delete</i>
                 </div>
             </div>
         </div>

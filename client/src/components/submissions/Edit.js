@@ -86,7 +86,7 @@ class Edit extends Component{
 
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
-    const submission = state.submissions.find(submission => submission.id === id);
+    const submission = state.submissions.find(submission => submission._id === id);
     return{
         submission
     }

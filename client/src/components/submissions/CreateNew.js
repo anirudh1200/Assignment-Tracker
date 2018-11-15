@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import uuid from 'uuid';
+import axios from 'axios';
 
 class CreateNew extends Component{
 
@@ -9,8 +9,7 @@ class CreateNew extends Component{
         subject: '',
         date: '',
         time: 'Not Specified',
-        content: '',
-        id: uuid()
+        content: ''
     }
 
     handleChange = e => {
@@ -66,7 +65,14 @@ class CreateNew extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        addPost: (submission) => { dispatch({type: 'ADD_SUBMISSION', submission }) }
+        addPost: (submission) => {
+            dispatch({type: "ITEMS_LOADING"});
+            axios
+                .post('http://localhost:5000/api/submissions/', submission)
+                .then(res => dispatch({
+                    type: 'ADD_SUBMISSION', submission
+                }))
+        }
     }
 }
 

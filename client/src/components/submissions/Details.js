@@ -51,8 +51,8 @@ class Details extends Component{
                             </div>
                         </div>
                         <div className="center">
-                            <button className="btn waves-effect waves-light amber z-depth-1 center" onClick={this.handleEdit} style={{display: "block", width: "100%"}} id={ submission.id }><i className="material-icons">edit</i> Edit</button>
-                            <button className="btn waves-effect waves-light red darken-2 z-depth-1 center"onClick={this.handleDelete}  style={{display: "block", width: "100%", marginTop: "1%"}} id={ submission.id }><i className="material-icons">delete</i> Delete</button>
+                            <button className="btn waves-effect waves-light amber z-depth-1 center" onClick={this.handleEdit} style={{display: "block", width: "100%"}} id={ submission._id }><i className="material-icons">edit</i> Edit</button>
+                            <button className="btn waves-effect waves-light red darken-2 z-depth-1 center"onClick={this.handleDelete}  style={{display: "block", width: "100%", marginTop: "1%"}} id={ submission._id }><i className="material-icons">delete</i> Delete</button>
                         </div>
                     </div>
             )
@@ -62,7 +62,7 @@ class Details extends Component{
 
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
-    const submission = state.submissions.find(submission => submission.id === id);
+    const submission = state.submissions.find(submission => submission._id === id);
     return{
         submission
     }
