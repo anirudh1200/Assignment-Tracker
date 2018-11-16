@@ -26,7 +26,8 @@ const SubmissionReducer = (state = initState, action) => {
             });
             return {
                 ...state,
-                submissions: newSubmissions
+                submissions: newSubmissions,
+                loading: false
             }
         case 'EDIT_SUBMISSION':
             console.log("Edited");
@@ -35,7 +36,8 @@ const SubmissionReducer = (state = initState, action) => {
             });
             return {
                 ...state,
-                submissions: editedSubmissions
+                submissions: [editedSubmissions, action.submission],
+                loading: false
             }
         case 'ITEMS_LOADING':
             console.log("Loading");

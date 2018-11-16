@@ -24,7 +24,7 @@ class Dashboard extends Component{
     }
 
     componentDidMount(){
-        this.props.getItems();
+        setTimeout(this.props.getItems,500);
     }
 
     render(){

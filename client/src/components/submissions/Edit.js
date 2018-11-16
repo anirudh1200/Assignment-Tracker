@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Edit extends Component{
 
@@ -31,7 +32,7 @@ class Edit extends Component{
 
     handleEditSubmit = e => {
         e.preventDefault();
-        console.log("To be edited");
+        console.log("Edit being processed");
         this.props.editPost(this.props.submission);
         this.redirectHome();
     }
@@ -43,13 +44,13 @@ class Edit extends Component{
 
     render(){
         const { submission } = this.props;
+        console.log(this.props);
         if(submission === undefined){
             return(
                 <div className="center"> Page Not Found </div>
             )
         }
         else{
-            console.log(this.state);
             return(
                 <div className="container">
                     <form onSubmit={this.handleEditSubmit} className="white">
@@ -94,7 +95,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        editPost: (submission) => { dispatch({type: 'EDIT_SUBMISSION', submission}) }
+        editPost: (submission) => {
+            dispatch({type: "ITEMS_LOADING"});
+            axios
+                .put(`http://localhost:5000/api/submissions/${submission._id}`, submission)
+                .then(res => dispatch({
+                    type: 'EDIT_SUBMISSION',
+                    id: submission._id,
+                    submission
+                }));
+        }
     }
 }
 
