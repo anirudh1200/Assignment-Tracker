@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import Summary from '../submissions/Summary';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import socketIOClient from "socket.io-client";
+import { getItems, deleteSubmission } from '../../store/actions/submissionActions';
+import sendUpdatePing from '../../socket/socket';
 
 class Dashboard extends Component{
+
+    constructor() {
+        super();
+        this.state = {
+            endpoint: "http://localhost:5000"
+        };
+    }
 
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
             console.log("To be deleted");
-            this.props.deletePost(e.target.id);
+            this.props.deleteSubmission(e.target.id);
         }
+        sendUpdatePing();
     }
 
     handleEdit = e => {
@@ -28,6 +38,10 @@ class Dashboard extends Component{
     }
 
     render(){
+        const socket = socketIOClient(this.state.endpoint);
+        socket.on('processUpdate', () => {
+            setTimeout(this.props.getItems ,1000);
+        });
         const { submissions } = this.props;
         console.log(submissions);
         return(
@@ -46,30 +60,15 @@ class Dashboard extends Component{
 
 const mapStateToProps = (state) => {
     return{
-        submissions: state.submissions
+        submissions: state.submissions,
+        error: state.error
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        getItems: () => {
-            dispatch({type: "ITEMS_LOADING"});
-            axios
-                .get('http://localhost:5000/api/submissions/')
-                .then(res => dispatch({
-                    type: "GET_SUBMISSION",
-                    submission: res.data
-                }))
-        },
-        deletePost: (id) => {
-            dispatch({type: "ITEMS_LOADING"});
-            axios
-                .delete(`http://localhost:5000/api/submissions/${id}`)
-                .then(res => dispatch({
-                    type: "DELETE_SUBMISSION",
-                    id
-                }))
-        }
+        getItems: () => dispatch(getItems()),
+        deleteSubmission: (id) => dispatch(deleteSubmission(id)),
     }
 }
 

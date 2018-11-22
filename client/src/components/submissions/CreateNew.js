@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { addSubmission } from '../../store/actions/submissionActions';
+import sendUpdatePing from '../../socket/socket';
 
 class CreateNew extends Component{
 
@@ -25,7 +26,8 @@ class CreateNew extends Component{
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.addPost(this.state);
+        this.props.addSubmission(this.state);
+        sendUpdatePing();
         this.redirectHome();
     }
 
@@ -65,14 +67,7 @@ class CreateNew extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        addPost: (submission) => {
-            dispatch({type: "ITEMS_LOADING"});
-            axios
-                .post('http://localhost:5000/api/submissions/', submission)
-                .then(res => dispatch({
-                    type: 'ADD_SUBMISSION', submission
-                }))
-        }
+            addSubmission: (submission) => dispatch(addSubmission(submission))
     }
 }
 

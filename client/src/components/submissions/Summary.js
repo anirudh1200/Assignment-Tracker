@@ -18,7 +18,7 @@ const Summary = props => {
                 </Link>
                 <div className="col s3">
                     <i className="material-icons center" onClick={ props.onEdit } style={{color: "black", display: "block", marginTop: "50%"}} id={ submission._id }>edit</i>
-                    <i className="material-icons center" onClick={ props.onDelete } style={{color: "black", display: "block", marginTop: "20%"}} id={ submission._id }>delete</i>
+                    <i className="material-icons center" onClick={ props.onDelete } style={{color: "black", display: "block", marginTop: "30%"}} id={ submission._id }>delete</i>
                 </div>
             </div>
         </div>

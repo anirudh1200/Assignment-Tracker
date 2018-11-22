@@ -46,7 +46,7 @@ const SubmissionReducer = (state = initState, action) => {
                 loading: true
             }
         default:
-            console.log("Error");
+            console.log("Error in reducer");
             return state;
     }
 }
