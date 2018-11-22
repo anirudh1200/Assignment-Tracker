@@ -37,7 +37,8 @@ router.delete('/:id', (req,res) => {
 // @desc    to update submissions from list using id
 router.put('/:id', (req, res) => {
     var query = { _id: req.params.id };
-    Submission.replaceOne(query, req.body);
+    Submission.replaceOne(query, req.body)
+        .then();
 })
 
 module.exports = router;

@@ -1,8 +1,4 @@
-import openSocket from 'socket.io-client';
-
-const socket = openSocket('http://localhost:5000');
-
-const sendUpdatePing = () => {
+const sendUpdatePing = (socket) => {
     socket.emit('toUpdate', () => {
         return false;
     });

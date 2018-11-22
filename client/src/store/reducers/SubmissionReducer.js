@@ -1,6 +1,9 @@
+import socketIOClient from "socket.io-client";
+
 const initState = {
     submissions: [ ],
-    loading: false
+    loading: false,
+    socket: socketIOClient("http://localhost:5000")
 }
 
 const SubmissionReducer = (state = initState, action) => {

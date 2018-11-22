@@ -27,7 +27,7 @@ class CreateNew extends Component{
     handleSubmit = e => {
         e.preventDefault();
         this.props.addSubmission(this.state);
-        sendUpdatePing();
+        sendUpdatePing(this.props.socket);
         this.redirectHome();
     }
 
@@ -71,4 +71,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateNew);
+const mapStateToProps = (state) => {
+    return{
+        socket: state.socket
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNew);

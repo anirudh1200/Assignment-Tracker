@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import sendUpdatePing from '../../socket/socket';
 import { deleteSubmission } from '../../store/actions/submissionActions';
 
 class Details extends Component{
@@ -8,6 +9,7 @@ class Details extends Component{
         if(window.confirm("Are you sure you want to delete this?")){
             console.log("To be deleted");
             this.props.deleteSubmission(e.target.id);
+            sendUpdatePing(this.props.socket);
             this.redirectHome();
         }
     }
@@ -65,13 +67,15 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const submission = state.submissions.find(submission => submission._id === id);
     return{
-        submission
+        submission,
+        socket: state.socket
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        deletePost: (id) => dispatch(deleteSubmission(id))
+        deletePost: (id) => dispatch(deleteSubmission(id)),
+        deleteSubmission: (id) => dispatch(deleteSubmission(id))
     }
 }
 

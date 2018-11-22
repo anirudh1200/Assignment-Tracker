@@ -35,7 +35,7 @@ class Edit extends Component{
         e.preventDefault();
         console.log("Edit being processed");
         this.props.editSubmission(this.props.submission);
-        sendUpdatePing();
+        sendUpdatePing(this.props.socket);
         this.redirectHome();
     }
 
@@ -91,7 +91,8 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const submission = state.submissions.find(submission => submission._id === id);
     return{
-        submission
+        submission,
+        socket: state.socket
     }
 }
 

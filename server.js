@@ -41,11 +41,14 @@ const io = socket().listen(server);
 // const clientSocket = socket().listen('http://localhost:3000');
 
 io.on('connection', (socket) => {
-    console.log("Connected successfully!!");
+    console.log("Connected successfully!!", socket.id, io.engine.clientsCount);
 
     socket.on('toUpdate', () => {
         console.log("Recieved to update");
         socket.broadcast.emit('processUpdate');
     })
 
+    socket.on('disconnect', () => {
+        console.log("Disconnected Successfully", socket.id);
+    })
 });

@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import Summary from '../submissions/Summary';
 import { connect } from 'react-redux';
-import socketIOClient from "socket.io-client";
 import { getItems, deleteSubmission } from '../../store/actions/submissionActions';
 import sendUpdatePing from '../../socket/socket';
 
 class Dashboard extends Component{
-
-    constructor() {
-        super();
-        this.state = {
-            endpoint: "http://localhost:5000"
-        };
-    }
 
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
             console.log("To be deleted");
             this.props.deleteSubmission(e.target.id);
         }
-        sendUpdatePing();
+        sendUpdatePing(this.props.socket);
     }
 
     handleEdit = e => {
@@ -38,8 +30,7 @@ class Dashboard extends Component{
     }
 
     render(){
-        const socket = socketIOClient(this.state.endpoint);
-        socket.on('processUpdate', () => {
+        this.props.socket.on('processUpdate', () => {
             setTimeout(this.props.getItems ,1000);
         });
         const { submissions } = this.props;
@@ -59,9 +50,10 @@ class Dashboard extends Component{
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return{
         submissions: state.submissions,
-        error: state.error
+        socket: state.socket
     }
 }
 
