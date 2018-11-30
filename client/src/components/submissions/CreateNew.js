@@ -10,7 +10,8 @@ class CreateNew extends Component{
         subject: '',
         date: '',
         time: 'Not Specified',
-        content: ''
+        content: '',
+        author: ''
     }
 
     handleChange = e => {
@@ -34,7 +35,7 @@ class CreateNew extends Component{
     render(){
         return(
             <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
+                <form onSubmit={this.handleSubmit} style={{backgroundColor: "rgba(0,0,0,0)"}}>
                     <h5 className="grey-text text-darken-4 center">Add New Submission</h5>
                     <div className="input-field">
                         <label htmlFor="title">Title</label>
@@ -49,12 +50,16 @@ class CreateNew extends Component{
                         <input type="date" id="date" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="time" placeholder="Not Specified">Time</label>
-                        <input type="text" id="time" onChange={this.handleChange} />
+                        <label htmlFor="time" defaultValue="Not Specified">Time</label>
+                        <input type="text" id="time" defaultValue="Not Specified" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="content" maxLength="250">Content</label>
+                        <label htmlFor="content">Content</label>
                         <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="author">Author</label>
+                        <input type="text" id="author" defaultValue="Anonymous" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-1">Add New Submission</button>

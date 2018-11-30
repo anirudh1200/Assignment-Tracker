@@ -30,6 +30,13 @@ class Details extends Component{
         this.props.history.push(path);
     }
 
+    formatDate = (inputDate) => {
+        const y = inputDate.slice(0,4);
+        const m = inputDate.slice(5,7);
+        const d = inputDate.slice(8,10);
+        return d+'/'+m+'/'+y;
+    }
+
     render(){
         const { submission } = this.props;
         if(submission === undefined){
@@ -38,6 +45,8 @@ class Details extends Component{
             )
         }
         else{
+            const dateCreated = this.formatDate(submission.dateCreated);
+            const submissionDate = this.formatDate(submission.date);
             return(
                 <div className="container section project-details">
                         <div className="card z-depth-1">
@@ -45,12 +54,12 @@ class Details extends Component{
                                 <span className="card-title">{submission.title}</span>
                                 <h6>{ submission.content }</h6>
                                 <div>Subject: { submission.subject }</div>
-                                <div>Submission Date: { submission.date }</div>
+                                <div>Submission Date: { submissionDate }</div>
                                 <div>Time: { submission.time }</div>
                             </div>
                             <div className="card-action grey lighten-4 grey-text">
-                                <div>Posted by The Net Ninja</div>
-                                <div>on 26/05/2018</div>
+                                <div>Posted by { submission.author }</div>
+                                <div>on { dateCreated }</div>
                             </div>
                         </div>
                         <div className="center">

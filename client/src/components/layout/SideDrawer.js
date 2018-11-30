@@ -9,11 +9,13 @@ const SideDrawer = props => {
     }
     return(
         <nav className={drawerClasses}>
+            <h4 className="center" style={{margin: "15%", color: "rgb(100,100,100)", fontFamily: "Montserrat"}}>
+                YeDivision
+            </h4>
             <ul>
+                <li onClick={props.closeit}><NavLink to="/">View Upcoming</NavLink></li>
+                <li onClick={props.closeit}><NavLink to="/previous">View Previous</NavLink></li>
                 <li onClick={props.closeit}><NavLink to="/create">Add New Submission</NavLink></li>
-                <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>
-                <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>
-                <li onClick={props.closeit}><NavLink to="/">Test 1</NavLink></li>
             </ul>
         </nav>
     )

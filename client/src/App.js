@@ -8,6 +8,7 @@ import Backdrop from './components/layout/Backdrop';
 import Details from './components/submissions/Details';
 import CreateNew from './components/submissions/CreateNew';
 import Edit from './components/submissions/Edit';
+import prevDashboard from './components/dashboard/prevDashboard';
 
 class App extends Component {
     state = {
@@ -35,6 +36,7 @@ class App extends Component {
                         <Route path='/submission/:id' component={Details} />
                         <Route path='/create' component={CreateNew} />
                         <Route path='/edit/:id' component={Edit} />
+                        <Route path='/previous' component={prevDashboard} />
                     </Switch>
                     <SideDrawer show={this.state.sideDrawerOpen} closeit={this.backdropClickHandler} />
                     {backdrop}

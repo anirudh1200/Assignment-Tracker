@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Summary from '../submissions/Summary';
 import { connect } from 'react-redux';
-import { getItems, deleteSubmission } from '../../store/actions/submissionActions';
+import { deleteSubmission } from '../../store/actions/submissionActions';
 import sendUpdatePing from '../../socket/socket';
 
-class Dashboard extends Component{
+class prevDashboard extends Component{
 
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
@@ -25,13 +25,6 @@ class Dashboard extends Component{
         this.props.history.push(path);
     }
 
-    componentDidMount(){
-        setTimeout(this.props.getItems, 500);
-        this.props.socket.on('processUpdate', () => {
-            setTimeout(this.props.getItems, 1000);
-        });
-    }
-
     render(){
         const { submissions } = this.props;
         return(
@@ -39,7 +32,7 @@ class Dashboard extends Component{
                 <div className="project-list section">
                     {submissions.map(submission => {
                         return(
-                            <Summary onDelete={this.handleDelete} onEdit={this.handleEdit} submission={submission} key={submission._id} date={new Date(Date.now())} />
+                            <Summary onDelete={this.handleDelete} onEdit={this.handleEdit} submission={submission} key={submission._id}/>
                         )
                     })}
                 </div>
@@ -52,7 +45,7 @@ const mapStateToProps = (state) => {
     const today = new Date(Date.now());
     const upcomingSubmissions = state.submissions.filter(submission => {
         const date = new Date(submission.date)
-        return date >= today
+        return date <= today
     });
     return{
         submissions: upcomingSubmissions,
@@ -62,9 +55,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        getItems: () => dispatch(getItems()),
         deleteSubmission: (id) => dispatch(deleteSubmission(id))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(prevDashboard);

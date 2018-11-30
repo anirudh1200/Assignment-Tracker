@@ -6,7 +6,7 @@ const express       = require('express'),
 // @desc    to get all submissions in list
 router.get('/', (req, res) => {
     Submission.find()
-        .sort({title: 1})
+        .sort({date: 1})
         .then(submissions => res.json(submissions));
 });
 
