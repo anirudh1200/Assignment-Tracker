@@ -9,7 +9,10 @@ if(localStorage.getItem('data')){
 const initState = {
     submissions: savedData,
     loading: false,
-    socket: socketIOClient("http://localhost:5000")
+    //for local build
+    // socket: socketIOClient("http://localhost:5000")
+    //for production build
+    socket: socketIOClient("https://damp-refuge-65272.herokuapp.com/")
 }
 
 const SubmissionReducer = (state = initState, action) => {
