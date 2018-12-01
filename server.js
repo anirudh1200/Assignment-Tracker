@@ -12,7 +12,11 @@ app.use(bodyParser.urlencoded({ extended:true }));
 app.use(logger('dev'));
 
 //connecting to database
-mongoose.connect("mongodb://localhost/submissionApp", { useNewUrlParser:true })
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/submissionApp';
+mongoose.connect(uristring, { useNewUrlParser:true })
     .then(() => console.log("Database connected"))
     .catch(() => console.log("Database error"));
 
