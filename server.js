@@ -42,7 +42,8 @@ if(process.env.NODE_ENV == 'production'){
 // STARTING THE SERVER
 //=======================
 
-const server = app.listen(5000, () => console.log("Server started at port 5000"));
+const port = process.env.PORT || 5000;
+const server = app.listen(port, () => console.log("Server started at port ", port));
 
 //========================
 // SOCKET IO STUFF
