@@ -1,7 +1,8 @@
 const express           = require('express'),
       mongoose          = require('mongoose'),
       bodyParser        = require('body-parser'),
-      logger            =  require('morgan'),
+      logger            = require('morgan'),
+      path              = require('path'),
       SubmissionRoutes  = require('./routes/api/SubmissionRoutes'),
       app               = express();
 
@@ -25,6 +26,17 @@ app.use(function(req, res, next) {
 
 //for all routes /api/submissions/
 app.use("/api/submissions", SubmissionRoutes);
+
+// Serve static assets if in production
+if(process.env.NODE_ENV == 'production'){
+    //Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
 
 //=======================
 // STARTING THE SERVER

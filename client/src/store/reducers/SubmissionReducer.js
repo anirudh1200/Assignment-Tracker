@@ -1,7 +1,13 @@
 import socketIOClient from "socket.io-client";
 
+let savedData = [];
+
+if(localStorage.getItem('data')){
+    savedData = JSON.parse(localStorage.getItem('data'));
+}
+
 const initState = {
-    submissions: [ ],
+    submissions: savedData,
     loading: false,
     socket: socketIOClient("http://localhost:5000")
 }

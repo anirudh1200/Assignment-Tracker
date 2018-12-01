@@ -32,6 +32,12 @@ class Dashboard extends Component{
         });
     }
 
+    componentWillUpdate(nextProps, nextState){
+        if(nextProps.submissions[0]){
+            localStorage.setItem('data', JSON.stringify(nextProps.submissions));
+        }
+    }
+
     render(){
         const { submissions } = this.props;
         return(
@@ -49,6 +55,7 @@ class Dashboard extends Component{
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.submissions);
     const today = new Date(Date.now());
     const upcomingSubmissions = state.submissions.filter(submission => {
         const date = new Date(submission.date)
