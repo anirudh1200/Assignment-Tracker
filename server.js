@@ -11,12 +11,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(logger('dev'));
 
-//connecting to database
-var uristring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/submissionApp';
-mongoose.connect(uristring, { useNewUrlParser:true })
+// DB config
+// for development
+// const db = 'mongodb://localhost/submissionApp'
+// for production
+const db = require('./config/keys').mongoURI;
+// connecting to database
+mongoose.connect(db, { useNewUrlParser:true })
     .then(() => console.log("Database connected"))
     .catch(() => console.log("Database error"));
 
