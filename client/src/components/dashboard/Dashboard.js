@@ -27,6 +27,7 @@ class Dashboard extends Component{
 
     componentDidMount(){
         if(!navigator.onLine) {
+            console.log(navigator);
             this.props = JSON.parse(localStorage.getItem('data'));
         }
         setTimeout(this.props.getItems, 500);
