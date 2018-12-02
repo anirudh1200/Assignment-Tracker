@@ -13,11 +13,11 @@ app.use(logger('dev'));
 
 // DB config
 // for development
-const db = 'mongodb://localhost/submissionApp'
+// const db = 'mongodb://localhost/submissionApp'
 // for production
 // const db = require('./config/keys').mongoURI;
 // for heroku using config vars
-// const db = process.env.DATABASE_URL;
+const db = process.env.DATABASE_URL;
 // connecting to database
 mongoose.connect(db, { useNewUrlParser:true })
     .then(() => console.log("Database connected"))
