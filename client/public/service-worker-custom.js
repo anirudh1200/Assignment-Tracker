@@ -15,7 +15,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 1;
 let CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 };
@@ -30,7 +30,8 @@ var cacheFiles = [
     'static/js/main.5270ba95.chunk.js',
     'service-worker-custom.js',
     'manifest.json',
-    'favicon.ico'
+    'icon.png',
+    '/css/materialize.min.css'
 ]
 
 function createCacheBustedRequest(url) {
