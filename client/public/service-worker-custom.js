@@ -15,7 +15,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 10;
 let CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 };
@@ -23,15 +23,19 @@ const OFFLINE_URL = 'index.html';
 
 var cacheFiles = [
     '/',
-    'offline.html',
     'index.html',
-    'static/css/main.19620817.chunk.css',
+    'static/css/main.52ca198f.chunk.css',
     'static/js/1.4c57d24b.chunk.js',
-    'static/js/main.5270ba95.chunk.js',
+    'static/js/main.61e96ec6.chunk.js',
     'service-worker-custom.js',
     'manifest.json',
     'icon.png',
-    '/css/materialize.min.css'
+    'js/materialize.js',
+    'MaterialIcons-Regular.woff2',
+    'MaterialIcons-Regular.woff',
+    'MaterialIcons-Regular.ttf',
+    'css/materialize.min.css',
+    'fonts.css'
 ]
 
 function createCacheBustedRequest(url) {
@@ -62,32 +66,10 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-  // Delete all caches that aren't named in CURRENT_CACHES.
-  // While there is only one cache in this example, the same logic will handle the case where
-  // there are multiple versioned caches.
-  let expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
-    return CURRENT_CACHES[key];
-  });
 
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (expectedCacheNames.indexOf(cacheName) === -1) {
-            // If this cache name isn't present in the array of "expected" cache names,
-            // then delete it.
-            console.log('Deleting out of date cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
 });
 
 self.addEventListener('fetch', function(event) {
- console.log(event.request.url);
-
  event.respondWith(
    caches.match(event.request).then(function(response) {
      return response || fetch(event.request);
