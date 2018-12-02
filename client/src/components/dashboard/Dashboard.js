@@ -26,6 +26,9 @@ class Dashboard extends Component{
     }
 
     componentDidMount(){
+        if(!navigator.onLine) {
+            this.props = JSON.parse(localStorage.getItem('data'));
+        }
         setTimeout(this.props.getItems, 500);
         this.props.socket.on('processUpdate', () => {
             setTimeout(this.props.getItems, 1000);
@@ -70,7 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getItems: () => dispatch(getItems()),
-        deleteSubmission: (id) => dispatch(deleteSubmission(id))
+        deleteSubmission: (id) => dispatch(deleteSubmission(id)),
     }
 }
 

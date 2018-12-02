@@ -55,7 +55,7 @@ class Edit extends Component{
         else{
             return(
                 <div className="container">
-                    <form onSubmit={this.handleEditSubmit} className="white">
+                    <form onSubmit={this.handleEditSubmit}  style={{backgroundColor: "rgba(0,0,0,0)"}}>
                         <h5 className="grey-text text-darken-4 center">Edit</h5>
                         <div className="input-field">
                             <input type="text" id="title" placeholder="Test" defaultValue={submission.title} onChange={this.handleChange} />

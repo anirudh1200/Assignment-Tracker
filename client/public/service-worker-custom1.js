@@ -1,9 +1,10 @@
 // Set a name for the current cache
-var cacheName = 'v2';
+var cacheName = 'v1';
 
 // Default files to always cache
 var cacheFiles = [
     '/',
+    'offline.html',
     'index.html',
     'static/css/main.19620817.chunk.css',
     'static/js/1.4c57d24b.chunk.js',
@@ -32,6 +33,25 @@ self.addEventListener('install', function(e) {
 
 
 self.addEventListener('activate', function(e) {
+    console.log('[ServiceWorker] Activated');
+
+    e.waitUntil(
+
+    	// Get all the cache keys (cacheName)
+		caches.keys().then(function(cacheNames) {
+			return Promise.all(cacheNames.map(function(thisCacheName) {
+
+				// If a cached item is saved under a previous cacheName
+				if (thisCacheName !== cacheName) {
+
+					// Delete that cached file
+					console.log('[ServiceWorker] Removing Cached Files from Cache - ', thisCacheName);
+					return caches.delete(thisCacheName);
+				}
+			}));
+		})
+	); // end e.waitUntil
+
 });
 
 
