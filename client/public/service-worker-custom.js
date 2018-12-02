@@ -15,7 +15,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 10;
+const CACHE_VERSION = 6;
 let CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 };
@@ -24,9 +24,9 @@ const OFFLINE_URL = 'index.html';
 var cacheFiles = [
     '/',
     'index.html',
-    'static/css/main.52ca198f.chunk.css',
-    'static/js/1.4c57d24b.chunk.js',
-    'static/js/main.61e96ec6.chunk.js',
+    'static/css/main.683d63be.chunk.css',
+    'static/js/1.7223fc95.chunk.js',
+    'static/js/main.3dbadf2c.chunk.js',
     'service-worker-custom.js',
     'manifest.json',
     'icon.png',

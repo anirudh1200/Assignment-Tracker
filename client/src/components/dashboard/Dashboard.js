@@ -8,15 +8,12 @@ class Dashboard extends Component{
 
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
-            console.log("To be deleted");
             this.props.deleteSubmission(e.target.id);
         }
         sendUpdatePing(this.props.socket);
     }
 
     handleEdit = e => {
-        console.log("To be edited");
-        console.log(e.target.id);
         this.redirectEdit(e.target.id);
     }
 
@@ -58,7 +55,6 @@ class Dashboard extends Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.submissions);
     const today = new Date(Date.now());
     const upcomingSubmissions = state.submissions.filter(submission => {
         const date = new Date(submission.date)
@@ -73,7 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getItems: () => dispatch(getItems()),
-        deleteSubmission: (id) => dispatch(deleteSubmission(id)),
+        deleteSubmission: (id) => dispatch(deleteSubmission(id))
     }
 }
 

@@ -25,7 +25,6 @@ export const deleteSubmission = (id) => {
 
 export const getItems = () => {
     return (dispatch) => {
-        console.log("GETITEMS");
         dispatch({type: "ITEMS_LOADING"});
         axios
             .get('/api/submissions/')

@@ -15,8 +15,6 @@ class prevDashboard extends Component{
     }
 
     handleEdit = e => {
-        console.log("To be edited");
-        console.log(e.target.id);
         this.redirectEdit(e.target.id);
     }
 

@@ -9,23 +9,18 @@ class Edit extends Component{
         switch(e.target.id){
             case 'title':
                 this.props.submission.title = e.target.value;
-                console.log(this.props.submission);
                 break;
             case 'subject':
                 this.props.submission.subject = e.target.value;
-                console.log(this.props.submission);
                 break;
             case 'date':
                 this.props.submission.date = e.target.value;
-                console.log(this.props.submission);
                 break;
             case 'time':
                 this.props.submission.time = e.target.value;
-                console.log(this.props.submission);
                 break;
             case 'content':
                 this.props.submission.content = e.target.value;
-                console.log(this.props.submission);
                 break;
             default: break;
         }
@@ -33,7 +28,6 @@ class Edit extends Component{
 
     handleEditSubmit = e => {
         e.preventDefault();
-        console.log("Edit being processed");
         this.props.editSubmission(this.props.submission);
         sendUpdatePing(this.props.socket);
         this.redirectHome();
@@ -46,7 +40,6 @@ class Edit extends Component{
 
     render(){
         const { submission } = this.props;
-        console.log(this.props);
         if(submission === undefined){
             return(
                 <div className="center"> Page Not Found </div>
