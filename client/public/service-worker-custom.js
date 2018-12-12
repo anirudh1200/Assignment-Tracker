@@ -15,7 +15,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 6;
+const CACHE_VERSION = 1;
 let CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 };
@@ -23,19 +23,20 @@ const OFFLINE_URL = 'index.html';
 
 var cacheFiles = [
     '/',
+    '/previous',
     'index.html',
-    'static/css/main.683d63be.chunk.css',
-    'static/js/1.7223fc95.chunk.js',
-    'static/js/main.3dbadf2c.chunk.js',
+    'static/css/main.c89c9094.chunk.css',
+    'static/js/1.4c57d24b.chunk.js',
+    'static/js/main.ea0c01fe.chunk.js',
     'service-worker-custom.js',
     'manifest.json',
     'icon.png',
     'js/materialize.js',
-    'MaterialIcons-Regular.woff2',
-    'MaterialIcons-Regular.woff',
-    'MaterialIcons-Regular.ttf',
+    'fonts/MaterialIcons-Regular.woff2',
+    'fonts/MaterialIcons-Regular.woff',
+    'fonts/MaterialIcons-Regular.ttf',
     'css/materialize.min.css',
-    'fonts.css'
+    'fonts/fonts.css'
 ]
 
 function createCacheBustedRequest(url) {
@@ -55,18 +56,35 @@ function createCacheBustedRequest(url) {
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    // We can't use cache.add() here, since we want OFFLINE_URL to be the cache key, but
-    // the actual URL we end up requesting might include a cache-busting parameter.
-    fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
-      return caches.open(CURRENT_CACHES.offline).then(function(cache) {
-        return cache.addAll(cacheFiles);
-      });
-    })
+      // We can't use cache.add() here, since we want OFFLINE_URL to be the cache key, but
+      // the actual URL we end up requesting might include a cache-busting parameter.
+      fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
+        return caches.open(CURRENT_CACHES.offline).then(function(cache) {
+          return cache.addAll(cacheFiles);
+        });
+      })
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', event => {
-
+self.addEventListener('activate', function(e) {
+    e.waitUntil(
+    	// Get all the cache keys (cacheName)
+		  caches.keys().then(function(cacheNames) {
+			     return Promise.all(cacheNames.map(function(thisCacheName) {
+				         // If a cached item is saved under a previous cacheName
+				             if (thisCacheName !== CURRENT_CACHES.offline) {
+                       // Delete that cached file
+                       console.log('[ServiceWorker] Removing Cached Files from Cache - ', thisCacheName);
+                       return caches.delete(thisCacheName);
+                    }
+            }));
+        })
+    );
+    // end e.waitUntil
+    // `claim()` sets this worker as the active worker for all clients that
+	  // match the workers scope and triggers an `oncontrollerchange` event for
+	  // the clients.
 });
 
 self.addEventListener('fetch', function(event) {

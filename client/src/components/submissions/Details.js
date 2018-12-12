@@ -7,7 +7,6 @@ class Details extends Component{
 
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
-            console.log("To be deleted");
             this.props.deleteSubmission(e.target.id);
             sendUpdatePing(this.props.socket);
             this.redirectHome();

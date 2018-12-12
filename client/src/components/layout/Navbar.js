@@ -6,7 +6,7 @@ const Navbar = props => {
         <nav>
             <div className="nav-wrapper grey darken-4">
                 <i className="material-icons left" style={{marginLeft: "3%"}} onClick={props.click}>menu</i>
-                <Link to="/" className="brand-logo center">Logo</Link>
+                <Link to="/" className="brand-logo center">YeDivision</Link>
             </div>
       </nav>
     )

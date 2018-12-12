@@ -23,9 +23,6 @@ class Dashboard extends Component{
     }
 
     componentDidMount(){
-        if(!navigator.onLine) {
-            this.props.submissions = JSON.parse(localStorage.getItem('data'));
-        }
         setTimeout(this.props.getItems, 500);
         this.props.socket.on('processUpdate', () => {
             setTimeout(this.props.getItems, 1000);

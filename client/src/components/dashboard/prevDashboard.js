@@ -8,7 +8,6 @@ class prevDashboard extends Component{
 
     handleDelete = e => {
         if(window.confirm("Are you sure you want to delete this?")){
-            console.log("To be deleted");
             this.props.deleteSubmission(e.target.id);
         }
         sendUpdatePing(this.props.socket);
@@ -21,6 +20,12 @@ class prevDashboard extends Component{
     redirectEdit = id => {
         let path = `/edit/` + id;
         this.props.history.push(path);
+    }
+
+    componentWillUpdate(nextProps, nextState){
+        if(nextProps.submissions[0]){
+            localStorage.setItem('prevData', JSON.stringify(nextProps.submissions));
+        }
     }
 
     render(){
@@ -41,12 +46,17 @@ class prevDashboard extends Component{
 
 const mapStateToProps = (state) => {
     const today = new Date(Date.now());
-    const upcomingSubmissions = state.submissions.filter(submission => {
+    let prevSubmissions = state.submissions.filter(submission => {
         const date = new Date(submission.date)
         return date <= today
     });
+    if(prevSubmissions.length === 0){
+      if(localStorage.getItem('prevData')){
+        prevSubmissions = JSON.parse(localStorage.getItem('prevData'));
+      }
+    }
     return{
-        submissions: upcomingSubmissions,
+        submissions: prevSubmissions,
         socket: state.socket
     }
 }
