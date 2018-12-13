@@ -31,7 +31,7 @@ class Dashboard extends Component{
 
     componentWillUpdate(nextProps, nextState){
         if(nextProps.submissions[0]){
-            localStorage.setItem('data', JSON.stringify(nextProps.submissions));
+            localStorage.setItem('data', JSON.stringify(nextProps.allSubmissions));
         }
     }
 
@@ -59,6 +59,7 @@ const mapStateToProps = (state) => {
     });
     return{
         submissions: upcomingSubmissions,
+        allSubmissions: state.submissions,
         socket: state.socket
     }
 }
