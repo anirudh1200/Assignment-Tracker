@@ -38,28 +38,28 @@ class CreateNew extends Component{
                 <form onSubmit={this.handleSubmit} style={{backgroundColor: "rgba(0,0,0,0)"}}>
                     <h5 className="grey-text text-darken-4 center">Add New Submission</h5>
                     <div className="input-field">
-                        <label htmlFor="title">Title</label>
                         <input type="text" id="title" onChange={this.handleChange} />
+                        <span className="helper-text">Title</span>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="subject">Subject</label>
                         <input type="text" id="subject" onChange={this.handleChange} />
+                        <span className="helper-text">Subject</span>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="date">Date</label>
                         <input type="date" id="date" onChange={this.handleChange} />
+                        <span className="helper-text">Date</span>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="time" defaultValue="Not Specified">Time</label>
-                        <input type="text" id="time" defaultValue="Not Specified" onChange={this.handleChange} />
+                        <input type="text" id="time" defaultValue="-" onChange={this.handleChange} />
+                        <span className="helper-text">Title</span>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="content">Content</label>
                         <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
+                        <span className="helper-text">Content</span>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="author">Author</label>
                         <input type="text" id="author" defaultValue="Anonymous" onChange={this.handleChange} />
+                        <span className="helper-text">Author</span>
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-1">Add New Submission</button>

@@ -15,23 +15,20 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 let CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 };
 const OFFLINE_URL = 'index.html';
 
+// Add all the files you want to cache after build
 var cacheFiles = [
     '/',
     '/previous',
     'index.html',
-    'static/css/main.c89c9094.chunk.css',
-    'static/js/1.4c57d24b.chunk.js',
-    'static/js/main.ea0c01fe.chunk.js',
     'service-worker-custom.js',
     'manifest.json',
     'icon.png',
-    'js/materialize.js',
     'fonts/MaterialIcons-Regular.woff2',
     'fonts/MaterialIcons-Regular.woff',
     'fonts/MaterialIcons-Regular.ttf',
